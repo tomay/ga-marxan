@@ -26,11 +26,11 @@ puvfile.each {|row|
   pu_id = row.strip.split(",")[1].to_i
   amount = row.strip.split(",")[2].to_f
   if spp_init == spec_id
-  	sum = sum + amount
+    sum = sum + amount
   else
-  	spp_sums[spp_init] = {:total_area => sum} # write out existing sum
-  	sum = amount # start new sum
-  	spp_init = spec_id # reset init
+    spp_sums[spp_init] = {:total_area => sum} # write out existing sum
+    sum = amount # start new sum
+    spp_init = spec_id # reset init
   end
   
   h = {}
@@ -75,9 +75,9 @@ spp.each {|species|
   prop = species[1][:prop]
   spf = species[1][:spf]
   if spp_sums[sp_id].nil? # no occurrences
-  	penalty = penalty + spf
+    penalty = penalty + spf
   else
-  	total = spp_sums[sp_id][:total_area]
+    total = spp_sums[sp_id][:total_area]
     area = selected[sp_id]["selected_amount"]
     if area < prop * total
       penalty = penalty + spf 
