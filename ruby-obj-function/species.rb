@@ -1,7 +1,11 @@
 require 'csv'
+#infile = ARGV[0]
+#selection = ARGV[1].split(",").map { |s| s.to_i }
+
 # open files
 sppf = "inputs/species.csv"
-puvf = "inputs/puvsp_spp_test.csv"
+#puvf = "inputs/puvsp_spp_test.csv"
+puvf = "inputs/puvsp_feat.csv"
 puvfile = File.open(puvf,"r")
 sppfile = File.open(sppf,"r")
 
@@ -67,21 +71,41 @@ selection.each {|id|
 
 # compare selected amounts to targets 
 # requires three files spp, spp_sums and selected
+# penalty for three cases:
+#   1. Species listed in species.csv but no occurrences in entire planning region (no occurrences in puvsp)
+#   2. No occurrences selected
+#   3. Not enough occurrences selected
 penalty = 0
+missed = 0
 spp.each {|species|
   #puts species
   sp_id = species[0]
   prop = species[1][:prop]
   spf = species[1][:spf]
-  if spp_sums[sp_id].nil? # no occurrences
-    penalty = penalty + spf
-  else
-    total = spp_sums[sp_id][:total_area]
-    area = selected[sp_id]["selected_amount"]
-    if area < prop * total
-      penalty = penalty + spf 
+  increase_penalty = true
+  begin
+    unless spp_sums[sp_id].nil? or selected[sp_id].nil? # case 1 or case 2
+      total = spp_sums[sp_id][:total_area]
+      area = selected[sp_id]["selected_amount"]
+      if area > prop * total # case 3
+        increase_penalty = false
+      end
     end
+    if increase_penalty
+      penalty = penalty + spf
+      missed += 1
+    end
+  rescue
+    puts "Exception on species id: " + sp_id.to_s
   end
 }
-puts "Penalty: " + penalty
+puts "Missed " + missed.to_s + " of " + spp.count.to_s + " species."
+puts "Penalty: " + penalty.to_s
 
+# selection = (0..5000).map{rand(1..1000)}.uniq!
+
+#Exception on species id: 275
+#Exception on species id: 289
+#Exception on species id: 291
+#Exception on species id: 292
+#Exception on species id: 295
