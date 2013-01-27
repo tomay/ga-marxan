@@ -64,7 +64,6 @@ selection.each {|id|
     selected[species] = h
   }
 }
-#puts "Perimeter: " + perimeter.to_s
 
 # compare selected amounts to targets 
 # requires three files spp, spp_sums and selected
@@ -84,3 +83,5 @@ spp.each {|species|
     end
   end
 }
+puts "Penalty: " + penalty
+
