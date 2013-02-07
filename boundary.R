@@ -1,14 +1,4 @@
-##
-## boundary penalty
-##
-#reading bnd
-bnd <- read.table("/home/tomay/r_work/inputs/bound.csv", header=TRUE, sep=",", 
-  na.strings="NA", dec=".", strip.white=TRUE)
-
-# test set of ids
-ids <- c(1,5,10,243,244)
-
-boundary_sum <- function(ids) {
+boundary <- function(ids, bnd) {
 	boundary = 0
 	for (id in ids) {
 		bnd2 = subset(bnd, id1==id | id2 == id)
@@ -31,7 +21,7 @@ boundary_sum <- function(ids) {
 	boundary = boundary + psum
 	#print (boundary)    
     } 
-    cat('final:',boundary,'\n')
+    return (boundary)
 }
 
-# boundary_sum(ids)
+
