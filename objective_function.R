@@ -4,8 +4,8 @@ source("boundary.R")
 source("species.R")
 
 # read inputs
-#path = "/small/"
-path = "/"
+path = "/small/"
+#path = "/"
 pu <- read.table(paste("/home/tomay/r_work/inputs",path,"pu.csv", sep=""), header=TRUE, sep=",", na.strings="NA", dec=".", strip.white=TRUE)
 bnd <- read.table(paste("/home/tomay/r_work/inputs",path,"bound.csv", sep=""), header=TRUE, sep=",", na.strings="NA", dec=".", strip.white=TRUE)
 puv <- read.table(paste("/home/tomay/r_work/inputs",path,"puvsp_feat.csv", sep=""), header=TRUE, sep=",", na.strings="NA", dec=".", strip.white=TRUE)
@@ -22,9 +22,9 @@ blm = 0.0001 # user defined
 # Sample run for one sample of pus 
 #
 ##
-# get score (here taking ids from random sample of n size)
-score = function(n) {
-  ids <- sample.int(7896, size = n, replace = TRUE, prob = NULL)
+# get score (here taking ids from random sample (n samples of value 1-x), e.g. 1000 from 1 to 7895 => score(7895, 1000)
+score = function(x, n) {
+  ids <- sample.int(x, size = n, replace = FALSE, prob = NULL)
 
   # construct objective function scores
   cost_penalty = cost(ids, pu)
