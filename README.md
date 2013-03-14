@@ -1,6 +1,6 @@
 ga-marxan
 =========
-Testing r functions for reproducing Marxan-like optimization using genetic algorithms
+Testing R functions for reproducing Marxan-like optimization using genetic algorithms
 
 Marxan cost functions
 ---------------------
