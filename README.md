@@ -4,7 +4,7 @@ Testing r functions for reproducing Marxan-like optimization using genetic algor
 
 Marxan cost functions
 ---------------------
-The main contribution so far is r-functions for calculating Marxan costs for a given set of planning units (e.g. the marxan objective function).
+The main contribution so far is r-functions for calculating Marxan costs for a given set of planning units (e.g. the marxan objective function). These are included in the file named "marxan_inits.R" and should be fairly self explanatory. Each function requires a vector of ids and a data frame each for the planning units (pu), species file (species), and puvspr file (puv).  
 
 Genetic algorithm
 -----------------
