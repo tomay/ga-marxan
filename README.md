@@ -8,7 +8,7 @@ The main contribution so far is r-functions for calculating Marxan costs for a g
 
 Genetic algorithm
 -----------------
-The genetic algorithm is not yet included here pending publication by collaborators, but contact me if you would like more information. 
+The genetic algorithm is not yet included here pending publication by collaborators, but contact me if you would like more information. Initial tests show we can get comparable results, though not as quickly. What's particularly appealing about this approach is the potential to use any objective function to define what makes a reserve network valuable, not only the one that ships with Marxan. 
 
 For more about Marxan:
 http://www.uq.edu.au/marxan/
