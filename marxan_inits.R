@@ -23,7 +23,9 @@ species_penalty <- function(ids, puv, species) {
   spf <- species[spp,"spf"]
   
   target <- spp_sums[spp,2] * species[spp,"prop"]
-  failed <- amount < target
-  failed[is.na(failed)] <- TRUE
-  sum(spf[failed])
+  failed <- amount / target # failed <- amount < target
+  failed[is.na(failed)] <- 0 # failed[is.na(failed)] <- TRUE
+  failed[failed > 1] <- 1 
+  penalties <- spf * (1 - failed)
+  sum(penalties) #sum(spf[failed])
 }

@@ -6,6 +6,7 @@ source("ga/init.R")
 library(data.table)
 
 ## get marxan inputs data-set
+#data.path <- "inputs/bigData"
 data.path <- "inputs/MarxanData/input"
 
 ## small data-set
